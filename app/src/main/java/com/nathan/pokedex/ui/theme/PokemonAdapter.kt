@@ -1,5 +1,3 @@
-package com.nathan.pokedex.ui.theme
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nathan.pokedex.R
 import com.nathan.pokedex.model.PokemonResult
 
-class PokemonAdapter (
+class PokemonAdapter(
     private val pokemonList: List<PokemonResult>,
-    private val onItemClick: (PokemonResult) -> Unit
+    private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
 
     inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,15 +24,10 @@ class PokemonAdapter (
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val pokemon = pokemonList[position]
-        // Exibe o nome com a primeira letra maiúscula
         holder.textName.text = pokemon.name.replaceFirstChar { it.uppercase() }
-
-        // Extrai o id da URL (exemplo: "https://pokeapi.co/api/v2/pokemon/25/" -> "25")
-        val id = pokemon.url.trimEnd('/').substringAfterLast('/')
-        holder.textId.text = "ID: $id"
-
+        holder.textId.text = "ID: ${pokemon.url.trimEnd('/').substringAfterLast('/')}"
         holder.itemView.setOnClickListener {
-            onItemClick(pokemon)
+            onItemClick(pokemon.name)
         }
     }
 

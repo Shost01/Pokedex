@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nathan.pokedex.model.PokemonResult
+import com.nathan.pokedex.network.PokemonApiService
 import com.nathan.pokedex.repository.PokemonRepository
 import kotlinx.coroutines.launch
 
-class PokemonListViewModel(private  val repository: PokemonRepository) : ViewModel() {
+class PokemonListViewModel(private  val repository: PokemonRepository, private val pokemonApiService: PokemonApiService) : ViewModel() {
 
     private val _pokemonList = MutableLiveData<List<PokemonResult>>()
     val pokemonList: LiveData<List<PokemonResult>> = _pokemonList
